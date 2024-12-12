@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=UserManager
-comment1.params=username\ age\ height\ weight
-comment1.target=boolean\ registerUser(java.lang.String,\ int,\ double,\ double)
-comment2.params=username
-comment2.target=RegularUser\ loginUser(java.lang.String)
-numComments=3
