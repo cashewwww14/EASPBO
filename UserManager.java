@@ -1,14 +1,19 @@
-// UserManager.java
 import java.util.HashMap;
+import java.util.Map;
 
 public class UserManager {
-    private HashMap<String, RegularUser> users = new HashMap<>();
+    private Map<String, RegularUser> users;
 
-    public boolean registerUser(String username, int age, double height, double weight) {
+    public UserManager() {
+        users = new HashMap<>();
+    }
+
+    public boolean registerUser(String username, int age, double height, double weight, String gender) {
         if (users.containsKey(username)) {
             return false; // Username already exists
         }
-        users.put(username, new RegularUser(username, age, height, weight));
+        RegularUser newUser = new RegularUser(username, age, height, weight, gender);
+        users.put(username, newUser);
         return true;
     }
 
