@@ -1,8 +1,5 @@
-// BMIAppGUI.java
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class BMIAppGUI {
     private UserManager userManager;
@@ -50,7 +47,7 @@ public class BMIAppGUI {
 
     private void showRegisterScreen() {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(5, 2));
+        panel.setLayout(new GridLayout(6, 2));
 
         JLabel usernameLabel = new JLabel("Username:");
         JTextField usernameField = new JTextField();
@@ -60,6 +57,8 @@ public class BMIAppGUI {
         JTextField heightField = new JTextField();
         JLabel weightLabel = new JLabel("Weight (kg):");
         JTextField weightField = new JTextField();
+        JLabel genderLabel = new JLabel("Gender:");
+        JComboBox<String> genderComboBox = new JComboBox<>(new String[]{"Laki-laki", "Perempuan"});
         JButton registerButton = new JButton("Register");
 
         panel.add(usernameLabel);
@@ -70,6 +69,8 @@ public class BMIAppGUI {
         panel.add(heightField);
         panel.add(weightLabel);
         panel.add(weightField);
+        panel.add(genderLabel);
+        panel.add(genderComboBox);
         panel.add(registerButton);
 
         frame.getContentPane().removeAll();
@@ -82,8 +83,9 @@ public class BMIAppGUI {
             int age = Integer.parseInt(ageField.getText());
             double height = Double.parseDouble(heightField.getText());
             double weight = Double.parseDouble(weightField.getText());
+            String gender = (String) genderComboBox.getSelectedItem();
 
-            if (userManager.registerUser(username, age, height, weight)) {
+            if (userManager.registerUser(username, age, height, weight, gender)) {
                 JOptionPane.showMessageDialog(frame, "Registration successful!");
                 showLoginScreen();
             } else {
@@ -105,23 +107,11 @@ public class BMIAppGUI {
                 "Nutrition Plan: " + user.getRecommendedNutrition());
         infoArea.setEditable(false);
 
-        JTable foodOptionsTable = new JTable(new Object[][] {
-            {"Carbohydrate Sources", "Kentang (3 butir - 150g)", "50g"},
-            {"Carbohydrate Sources", "Nasi (1 mangkuk kecil)", "40g"},
-            {"Protein Sources", "Ayam (100g)", "30g"},
-            {"Protein Sources", "Tahu (50g)", "10g"}
-        }, new String[] {"Type", "Food", "Amount/Day"});
-
         JButton logoutButton = new JButton("Logout");
         logoutButton.addActionListener(e -> showLoginScreen());
 
-        JPanel tablePanel = new JPanel(new BorderLayout());
-        tablePanel.add(new JLabel("Food Options:"), BorderLayout.NORTH);
-        tablePanel.add(new JScrollPane(foodOptionsTable), BorderLayout.CENTER);
-
         panel.add(welcomeLabel, BorderLayout.NORTH);
         panel.add(new JScrollPane(infoArea), BorderLayout.CENTER);
-        panel.add(tablePanel, BorderLayout.SOUTH);
         panel.add(logoutButton, BorderLayout.PAGE_END);
 
         frame.getContentPane().removeAll();
