@@ -1,8 +1,7 @@
-// RegularUser.java
 public class RegularUser extends BaseUser {
 
-    public RegularUser(String username, int age, double height, double weight) {
-        super(username, age, height, weight);
+    public RegularUser(String username, int age, double height, double weight, String gender) {
+        super(username, age, height, weight, gender);
     }
 
     @Override
