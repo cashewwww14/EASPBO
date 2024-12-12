@@ -3,12 +3,14 @@ public abstract class BaseUser {
     protected int age;
     protected double height; // in cm
     protected double weight; // in kg
+    protected String gender; // "Laki-laki" or "Perempuan"
 
-    public BaseUser(String username, int age, double height, double weight) {
+    public BaseUser(String username, int age, double height, double weight, String gender) {
         this.username = username;
         this.age = age;
         this.height = height;
         this.weight = weight;
+        this.gender = gender;
     }
 
     public abstract String getHealthAdvice();
@@ -29,10 +31,10 @@ public abstract class BaseUser {
     }
 
     public double calculateCalorieIntake() {
-        if (age >= 19) {
-            return weight * 30; // Simplified calculation: 30 kcal per kg
+        if (gender.equals("Laki-laki")) {
+            return weight * 30; // Simplified calculation for males
         } else {
-            return weight * 40; // Higher for younger users
+            return weight * 25; // Simplified calculation for females
         }
     }
 }
